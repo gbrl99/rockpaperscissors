@@ -1,0 +1,67 @@
+# Rock paper scissors
+
+import random, sys, re
+
+def rockPaperScissors():
+    gameChoices = ['r','p', 's'] # lists all the possible choices
+    win = 0
+    loss = 0
+    tie = 0
+    while True:
+        playerChoice = input("\nRock, paper or scissors?\nRock = r\nPaper = p\nScissors = s\n").lower() # asks the player to make his choice
+        cpuChoice = gameChoices[random.randint(0, 2)]
+        if (playerChoice not in gameChoices) or (cpuChoice not in gameChoices):
+            print("\nPlease type correctly.\n")
+            continue
+            
+        gameDictionary = {
+        'r' : 'Rock',
+        'p' : 'Paper',
+        's' : 'Scissors'
+            }
+
+        print('\nPlayer: ' + str(gameDictionary.get(playerChoice))) # Shows player's choice
+        print('CPU: ' + str(gameDictionary.get(cpuChoice))) # Shows CPU's choice
+            
+        if playerChoice == cpuChoice: # Player and CPU play equally -> It's a tie
+            print("It's a tie!")
+            tie = tie + 1
+        elif playerChoice == 'r' and cpuChoice == 's': #Player = Rock, CPU = Scissors -> Player wins
+            print("Rock breaks scissors")
+            print("You win")
+            win = win + 1
+        elif playerChoice == 'r' and cpuChoice == 'p': #Player = Rock, CPU = Paper -> CPU wins
+            print("Paper wraps rock")
+            print("You lose")
+            loss = loss + 1
+        elif playerChoice == 'p' and cpuChoice == 'r': #Player = Paper, CPU = Rock -> Player wins
+            print("Paper wraps rock")
+            print("You win")
+            loss = loss + 1
+        elif playerChoice == 'p' and cpuChoice == 's': #Player = Paper, CPU = Scissors -> CPU wins
+            print("Scissors cut paper")
+            print("You lose")
+            loss = loss + 1
+        elif playerChoice == 's' and cpuChoice == 'r': #Player = Scissors, CPU = Rock -> CPU wins
+            print("Rock breaks scissors")
+            print("You lose")
+            loss = loss + 1
+        elif playerChoice == 's' and cpuChoice == 'p': #Player = Scissors, CPU = Paper -> Player wins
+            print("Scissors cut paper")
+            print("You win")
+            win = win + 1
+            
+        print("\n")
+        print("GAME STATISTICS:\n") # Shows how many W/T/L each player got
+        print("Player:\n%s Wins\n%s Ties\n%s Losses\n" % (win, tie, loss))
+        print("CPU:\n%s Wins\n%s Ties\n%s Losses\n" % (loss, tie, win))
+        
+        playAgain = input("Would you like to play again? (y/n)\n") # Asks if the player wants to play again
+        if playAgain == 'y':
+            continue
+        else:
+            print("Thanks for playing!")
+            break
+        
+rockPaperScissors()
+    
